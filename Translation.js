@@ -48,8 +48,8 @@ var Translation = function() {
         return binary;
     }
 
-    function Convert(var bin){
-        var i;
+    function Convert(bin){
+        // var i;
         if(bin.equals("10000000000000000000000000000000"))
         {
             return "-0.0";
@@ -69,7 +69,7 @@ var Translation = function() {
         // char[] p = new char[8];
         // char[] f = new char[152];
         var sign=false;//false is positive true is negative
-        StringBuilder sb = new StringBuilder();
+        sb = new StringBuilder();
         var neg = Integer.parseInt(Character.toString(bin.charAt(0)),10);
         //Character.toString(bin.charAt(0));
         if(neg==1){
@@ -105,10 +105,8 @@ var Translation = function() {
         {
             return "denormalized";
         }
-        else if(power<24&&power>-1)
-        
-            for(i=9;i<32;i++)
-            {
+        else if(power<24&&power>-1){
+            for(i=9;i<32;i++){
                 if (pow==j){
                     f[j] = '.';
                     j++;
@@ -121,45 +119,39 @@ var Translation = function() {
             }
 
             len = 25;
-        }
-        else if (power <= -1){
+        } 
+        else if(power <= -1){
             f[0]='.';
             len++;
             power++;
-            while (power<=-1)
-            {
+            while (power<=-1){
                 f[len]='0';
                 power++;
                 len++;
             }
             f[len]='1';
             len++;
-            for(i=9;i<32;i++)
-            {
+            for(i=9;i<32;i++){
                     f[len] = bin.charAt(i);
                     len++;
             }
         }
-        else if (power >= 24)
-        {
+        else if (power >= 24){
             f[len]='1';
             len++;
-            for(i=9;i<32;i++)
-            {
+            for(i=9;i<32;i++){
                 f[len] = bin.charAt(i);
                 len++;
             }
             power = power-23;
             //System.out.println(new String(f));
-            while(power>0)
-            {
+            while(power>0){
                 f[len] = 0;
                 //System.out.println("Power:"+power+" Length:"+len);
                 power--;
                 len++;
             }
-            function main()
-            {
+            function main(){
                 //1111110 exp -1
                 //1111111100000000000000000000000
                 //00000100000000000000000000000000
