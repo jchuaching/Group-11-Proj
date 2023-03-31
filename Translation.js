@@ -47,6 +47,33 @@
         return binary;
     }
 
+    function BinToDec(binary, len){
+        pt = binary.indexOf('.');
+
+        if (pt == -1)
+            pt = len;
+
+        intDec = 0, fracDec = 0, twos = 1;
+
+        // Convert integral part of binary to decimal
+        // equivalent
+        for(i = pt - 1; i >= 0; i--){
+            intDec += (binary.charAt(i) - '0') * twos;
+            twos *= 2;
+        }
+
+        // Convert fractional part of binary to
+        // decimal equivalent
+        twos = 2;
+        for(i = pt + 1; i < len; i++){
+            fracDec += (binary.charAt(i) - '0') / twos;
+            twos *= 2.0;
+        }
+
+        // Add both integral and fractional part
+        return intDec + fracDec;
+    }
+
     function Convert(bin){
         // var i;
         if(bin.equals("10000000000000000000000000000000"))
@@ -150,20 +177,24 @@
                 power--;
                 len++;
             }
-            function main(){
-                //1111110 exp -1
-                //1111111100000000000000000000000
-                //00000100000000000000000000000000
-                //00000000001010000000000000000000 denormalized
-                //11111111101010000000000000000000 sNaN
-                //11111111111010000000000000000000 qNaN
-                //10000000000000000000000000000000 -0.0
-                //00000000000000000000000000000000 0.0
-                var bin = "01000001010100101000000000000000";
-                var S = Convert(bin);
-                SavetoFile(S);
-                console.log(S);
-                //console.log(convH2B("0FDcD000")); //Test translation
-            }
+            
         }
     }
+
+    function main(){
+        //1111110 exp -1
+        //1111111100000000000000000000000
+        //00000100000000000000000000000000
+        //00000000001010000000000000000000 denormalized
+        //11111111101010000000000000000000 sNaN
+        //11111111111010000000000000000000 qNaN
+        //10000000000000000000000000000000 -0.0
+        //00000000000000000000000000000000 0.0
+        var bin = "01000001010100101000000000000000";
+        var S = Convert(bin);
+        SavetoFile(S);
+        console.log("Hello World!");
+        console.log(S);
+        //console.log(convH2B("0FDcD000")); //Test translation
+    }
+    
