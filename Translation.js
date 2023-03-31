@@ -1,4 +1,4 @@
-function Translation(){
+// function Translation(){
     function SavetoFile(line) {
         try {
             var myWriter = new FileWriter("result.txt");
@@ -166,4 +166,4 @@ function Translation(){
                 //console.log(convH2B("0FDcD000")); //Test translation
             }
         }
-}
+// }
