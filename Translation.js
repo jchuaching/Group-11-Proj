@@ -1,12 +1,12 @@
 var Translation = function() {
 
-    SavetoFile: function(line) {
+    function SavetoFile(line) {
         try {
             var myWriter = new FileWriter("result.txt");
             myWriter.write(line);
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
+        } catch (e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
@@ -48,8 +48,8 @@ var Translation = function() {
         return binary;
     }
 
-    static String Convert(String bin){
-        int i;
+    function Convert(var bin){
+        var i;
         if(bin.equals("10000000000000000000000000000000"))
         {
             return "-0.0";
