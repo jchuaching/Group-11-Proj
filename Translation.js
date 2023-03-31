@@ -166,4 +166,4 @@
                 //console.log(convH2B("0FDcD000")); //Test translation
             }
         }
-// }
+    }
