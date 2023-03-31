@@ -1,5 +1,4 @@
-var Translation = function() {
-
+function Translation(){
     function SavetoFile(line) {
         try {
             var myWriter = new FileWriter("result.txt");
