@@ -66,8 +66,8 @@ var Translation = function() {
         {
             return "Positive Infinity";
         }
-        char[] p = new char[8];
-        char[] f = new char[152];
+        // char[] p = new char[8];
+        // char[] f = new char[152];
         var sign=false;//false is positive true is negative
         StringBuilder sb = new StringBuilder();
         var neg = Integer.parseInt(Character.toString(bin.charAt(0)),10);
