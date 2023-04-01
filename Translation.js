@@ -89,28 +89,33 @@ function BinToDec(binary, len){
 
 function Convert(bin){
     // var i;
-    if(bin.equals("10000000000000000000000000000000"))
+    alert(bin);
+
+    if(bin === "10000000000000000000000000000000")
     {
         return "-0.0";
     }
-    if(bin.equals("00000000000000000000000000000000"))
+    if(bin === "00000000000000000000000000000000")
     {
         return "0.0";
     }
-    if(bin.equals("11111111100000000000000000000000"))
+    if(bin === "11111111100000000000000000000000")
     {
         return "Negative Infinity";
     }
-    if(bin.equals("01111111100000000000000000000000"))
+    if(bin === "01111111100000000000000000000000")
     {
         return "Positive Infinity";
     }
+    alert("Here 1");
     // char[] p = new char[8];
     // char[] f = new char[152];
-    var sign = false;//false is positive true is negative
-    sb = new StringBuilder();
+    var sign = false;   //false is positive true is negative
     var neg = Integer.parseInt(Character.toString(bin.charAt(0)),10);
     //Character.toString(bin.charAt(0));
+
+    alert("Here 2");
+
     if(neg==1){
         sign = true;
 
@@ -139,6 +144,7 @@ function Convert(bin){
     var power = parseInt(new String(p),2) - 127;
     var pow = power+1;
     var len = 0;
+    alert("Here 3");
     if (power <-126 && !sign )
     {
         return "denormalized";
@@ -189,18 +195,19 @@ function Convert(bin){
         }
         
     }
-
+    alert("Here 4");
     var fractional = BinToDec(new String(f),len);
     j=0;
 
     var out = new String();
-    if(sign) {
+    if(sign){
         out = "-"+Double.toString(fractional);
     }
-    else
-        {
-                out = Double.toString(fractional);
-        }
+    else{
+            out = Double.toString(fractional);
+    }
+
+    alert("Here 4");
     return out;
 }
 
@@ -229,5 +236,5 @@ function add(num){
 function sample(){
     var num = document.getElementById("number").value;
     var len = num.length;
-    alert(BinToDec(num, len));
+    alert(Convert(num));
 }
