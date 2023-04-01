@@ -216,5 +216,7 @@ function main(){
     var S = Convert(bin);
     // var S = BinToDec(bin, bin.length);
     // var S = convH2B(bin);
+
+    // PSUEDOCHANGE FOR MERGING
     alert(S);
 }
