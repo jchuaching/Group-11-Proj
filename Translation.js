@@ -100,7 +100,7 @@ function Convert(bin){
     }
     // char[] p = new char[8];
     // char[] f = new char[152];
-    var sign=false;//false is positive true is negative
+    var sign = false;//false is positive true is negative
     sb = new StringBuilder();
     var neg = Integer.parseInt(Character.toString(bin.charAt(0)),10);
     //Character.toString(bin.charAt(0));
@@ -130,7 +130,6 @@ function Convert(bin){
     f[0] = '1';
     j=1;
     var power = parseInt(new String(p),2) - 127;
-    //System.out.println("Power: "+power);
     var pow = power+1;
     var len = 0;
     if (power <-126 && !sign )
@@ -176,17 +175,13 @@ function Convert(bin){
             len++;
         }
         power = power-23;
-        //System.out.println(new String(f));
         while(power>0){
             f[len] = 0;
-            //System.out.println("Power:"+power+" Length:"+len);
             power--;
             len++;
         }
         
     }
-    //System.out.println(new String(p)+"\n"+new String(f)+"\n"+power);
-        //System.out.println(BinToDec(new String(f),len));
 
     var fractional = BinToDec(new String(f),len);
     j=0;
@@ -199,7 +194,6 @@ function Convert(bin){
         {
                 out = Double.toString(fractional);
         }
-    //System.out.println(out);//fractional+"x10^"+power);
     return out;
 }
 
@@ -217,10 +211,8 @@ function main(){
     var bin = document.getElementById("number").value;
     var S = Convert(bin);
     // SavetoFile(S);
-    //console.log("Hello World!");
-    //console.log(S);
+    // console.log(S);
     alert(S);
-    //console.log(convH2B("0FDcD000")); //Test translation
 }
 function add(num){
     num++;
