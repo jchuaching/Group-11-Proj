@@ -107,10 +107,9 @@ function Convert(bin){
     {
         return "Positive Infinity";
     }
-    alert("Here 1");
     // char[] p = new char[8];
     // char[] f = new char[152];
-    var sign = false;   //false is positive true is negative
+    var sign = false;   // false is positive true is negative
     
     var neg  = parseInt(bin[0],10);
 
@@ -119,24 +118,26 @@ function Convert(bin){
 
     }
     var j = 0;
+    p = "";
+    alert("Here 0");
     for(i=1;i<9;i++)
     {
 
-        p[j] = bin.charAt(i);
+        p[j] = bin[i];
         j++;
     }
+    alert("Here 1");
+
     if(new String(p).equals("11111111"))
     {
-
-    if(Integer.parseInt(Character.toString(bin.charAt(9)),10)==1)
-    {
-        return "qNaN";
-    }
-    else
-        {
+        if(Integer.parseInt(Character.toString(bin.charAt(9)),10)==1){
+            return "qNaN";
+        }
+        else{
             return "sNaN";
         }
     }
+    alert("Here 2");
     f[0] = '1';
     j=1;
     var power = parseInt(new String(p),2) - 127;
@@ -207,6 +208,16 @@ function Convert(bin){
 
     alert("Here 4");
     return out;
+}
+
+function copyValues() {
+    var copyText = document.getElementById("number");
+    copyText.select();
+    document.execCommand("copy");
+    document.getElementById("number")
+        .innerHTML ="Copied the text: "
+        + copyText.value;
+    alert("Copied the text: " + copyText.value);
 }
 
 function main(){
