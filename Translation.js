@@ -69,9 +69,6 @@ function BinToDec(binary, len){
 }
 
 function Convert(bin){
-    // var i;
-    alert(bin);
-
     if(bin === "10000000000000000000000000000000"){
         return "-0.0";
     }
@@ -94,13 +91,10 @@ function Convert(bin){
     }
     var j = 0;
     p = "";
-    alert("Here 0");
     for(i=1;i<9;i++){
         p[j] = bin[i];
         j++;
     }
-    alert("Here 1");
-
     if(p === "11111111"){
         if(parseInt(bin[9],10)==1){
             return "qNaN";
@@ -109,13 +103,12 @@ function Convert(bin){
             return "sNaN";
         }
     }
-    alert("Here 2");
+    f = "";
     f[0] = '1';
     j=1;
     var power = parseInt(p,2) - 127;
     var pow = power+1;
     var len = 0;
-    alert("Here 3");
     if (power <-126 && !sign )
     {
         return "denormalized";
