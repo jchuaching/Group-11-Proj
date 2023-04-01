@@ -114,16 +114,21 @@ function Convert(bin){
         }
     }
 
+    // Extract exponent (undoing)
     f = "";
     f[0] = '1';
     j=1;
-    var power = parseInt(p,2) - 127;
-    var pow = power+1;
+    var power = parseInt(p,2) - 127; // e* = e-127
+    var pow = power + 1; // 
     var len = 0;
+
+    // Check if denormalized
     if (power <-126 && !isNegative )
     {
         return "denormalized";
     }
+    
+    // Postive exponent and 0
     else if(power < 24 && power > -1){
         for(i = 9; i < 32; i++){
             if (pow == j){
@@ -131,7 +136,6 @@ function Convert(bin){
                 j++;
                 i--;
             }
-
             else{
             f[j] = bin[i];
             j++;}
@@ -139,6 +143,8 @@ function Convert(bin){
 
         len = 25;
     } 
+
+    // Negative exponent
     else if(power <= -1){
         f[0] = '.';
         len++;
@@ -155,6 +161,7 @@ function Convert(bin){
                 len++;
         }
     }
+    
     else if (power >= 24){
         f[len]='1';
         len++;
