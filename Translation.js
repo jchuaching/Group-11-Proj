@@ -176,14 +176,15 @@ function Convert(bin){
     return out;
 }
 
+// change element to result id later
 function copyValues() {
-    var copyText = document.getElementById("number");
+    var copyText = document.getElementById("resultMessage").innerHTML;
+
     copyText.select();
     document.execCommand("copy");
-    document.getElementById("number")
-        .innerHTML ="Copied the text: "
-        + copyText.value;
-    alert("Copied the text: " + copyText.value);
+    //document.getElementById("resultMessage").innerHTML ="Copied the text: "
+   // + copyText;
+
 }
 
 function main(){
@@ -197,7 +198,11 @@ function main(){
     //00000000000000000000000000000000 0.0
     //var bin = "01000001010100101000000000000000";
 
-    var bin = document.getElementById("number").value;
-    var S = Convert(bin);
+    /* 1 function will be for the fixed  and the othe is for the floating point */
+    /* get textbox1 and textbox2 = if both have laman, we output sa errror */
+    /* if textbox1 has laman = compute for hexadecimal */
+    /* if textbox2 has laman = compute for binary */
+    var bin = document.getElementById("textbox1").value;
+    var S = convH2B(bin);
     alert(S);
 }

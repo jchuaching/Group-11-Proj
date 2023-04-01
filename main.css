@@ -1,0 +1,221 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+}
+
+.webpageBg {
+  width: 100%;
+  height: 801px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+
+.webpageTitleBg{
+  width: 100%;
+  height: 202px;
+  background: rgba(59,70,100,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.webpageTitle{
+  width: 848px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 78px;
+  left: 299px;
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 39px;
+  opacity: 1;
+  text-align: left;
+}
+
+.result {
+  width: 152px;
+  color: rgba(59,70,100,1);
+  position: absolute;
+  top: 499px;
+  left: 246px;
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 37px;
+  opacity: 1;
+  text-align: left;
+}
+
+.hexadecimalInput {
+  width: 378px;
+  color: rgba(59,70,100,1);
+  position: absolute;
+  top: 286px;
+  left: 246px;
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 37px;
+  opacity: 1;
+  text-align: left;
+}
+
+.binaryInput{
+  width: 272px;
+  color: rgba(59,70,100,1);
+  position: absolute;
+  top: 375px;
+  left: 244px;
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 37px;
+  opacity: 1;
+  text-align: left;
+}
+
+.textbox1 {
+  width: 552px;
+  height: 55px;
+  background: rgba(255,255,255,0);
+  opacity: 1;
+  position: absolute;
+  top: 285px;
+  left: 636px;
+  border: 2.3458333015441895px solid rgba(0,0,0,1);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0px 3.1277778148651123px 3px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.textbox2 {
+  width: 552px;
+  height: 55px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 369px;
+  left: 636px;
+  border: 2.3458333015441895px solid rgba(0,0,0,1);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0px 3.1277778148651123px 3px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.fixeddecButton {
+  width: 462px;
+  height: 54px;
+  background: rgba(59,70,100,1);
+  opacity: 1;
+  position: absolute;
+  top: 578px;
+  left: 246px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden;
+}
+
+.fixedButtonText {
+  width: 439px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 590px;
+  left: 257px;
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 25px;
+  opacity: 1;
+  text-align: center;
+}
+
+.floatingdecButton {
+  width: 462px;
+  height: 54px;
+  background: rgba(59,70,100,1);
+  opacity: 1;
+  position: absolute;
+  top: 578px;
+  left: 737px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden;
+}
+
+.floatingButtonText {
+  width: 439px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 590px;
+  left: 748px;
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 25px;
+  opacity: 1;
+  text-align: center;
+}
+
+.separator {
+  width: 957px;
+  background: url("../images/v25_77.png");
+  opacity: 1;
+  position: absolute;
+  top: 465px;
+  left: 243px;
+  border: 3.1277778148651123px solid rgba(59,70,100,1);
+}
+
+.clipboardButton{
+  width: 462px;
+  height: 54px;
+  background: rgba(59,70,100,1);
+  opacity: 1;
+  position: absolute;
+  top: 656px;
+  left: 491px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden;
+}
+
+.copyText {
+  width: 439px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 668px;
+  left: 503px;
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 25px;
+  opacity: 1;
+  text-align: center;
+}
+
+.result2 {
+  width: 800px;
+  color: rgba(59,70,100,1);
+  position: absolute;
+  top: 475px;
+  left: 400px;
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 30px;
+  opacity: 1;
+  text-align: left;
+}
