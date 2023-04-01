@@ -17,6 +17,11 @@ function SavetoFile(line) {
     }
 }
 
+/**
+ * Recieves a string of hex and converts it to a binary number.
+ * @param {*} hex 
+ * @returns 
+ */
 function convH2B(hex) {
     var binary = "";
     var x;
