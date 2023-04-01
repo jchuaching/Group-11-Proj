@@ -54,7 +54,8 @@ function BinToDec(binary, len){
     // Convert integral part of binary to decimal
     // equivalent
     for(i = pt - 1; i >= 0; i--){
-        intDec += (binary.charAt(i) - '0') * twos;
+        intDec += parseInt(binary[i], 2) * twos;
+        
         twos *= 2;
     }
 
@@ -62,10 +63,10 @@ function BinToDec(binary, len){
     // decimal equivalent
     twos = 2;
     for(i = pt + 1; i < len; i++){
-        fracDec += (binary.charAt(i) - '0') / twos;
+        fracDec += (binary[i] - '0') / twos;
         twos *= 2.0;
     }
-
+    
     // Add both integral and fractional part
     return intDec + fracDec;
 }
@@ -201,6 +202,7 @@ function main(){
 
     var bin = document.getElementById("number").value;
     // var S = Convert(bin);
-    var S = convH2B(bin);
+    var S = BinToDec(bin, bin.length);
+    // var S = convH2B(bin);
     alert(S);
 }
