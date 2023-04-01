@@ -37,45 +37,6 @@ function convH2B(hex) {
     }
     return binary;
 }
-/**
- * Recieves a string of hex and converts it to a binary number.
- * @param {*} hex
- * @returns
- */
-function convH2B(hex) {
-    var binary = "";
-    var x;
-    var hexDigit; //to represent each digit of the hex
-
-    hex = hex.toUpperCase();
-
-    var conv = {
-        '0': "0000",
-        '1': "0001",
-        '2': "0010",
-        '3': "0011",
-        '4': "0100",
-        '5': "0101",
-        '6': "0110",
-        '7': "0111",
-        '8': "1000",
-        '9': "1001",
-        'A': "1010",
-        'B': "1011",
-        'C': "1100",
-        'D': "1101",
-        'E': "1110",
-        'F': "1111"
-    };
-
-    for (x = 0; x < hex.length; x++) {
-        hexDigit = hex.charAt(x);
-        if (conv[hexDigit] !== undefined){
-            binary += conv[hexDigit];
-        }
-    }
-    return binary;
-}
 
 /**
  * Recieves a string of binary and converts it to a decimal number.
@@ -244,15 +205,19 @@ function copyValues() {
         //document.getElementById("resultMessage").innerHTML = "Copied the text: " + copyText.innerHTML;
 }
 
-function fixed(hex){
+function fixed(s){
+    // IF PURO 0 YUNG START NEED ERROR CHECKING
+
+
     // -234.455
     // parseInt : data, radix (base 10)
-    var tempHex = hex;
+    // alert(s);
+    var tempHex = s;
     var stopVar = 0;
     var tempLength = tempHex.length;
     var negIndex = tempHex.indexOf('-');
     var ptIndex = tempHex.indexOf('.');
-    var negFlag = 0;
+    var negFlag = false;
 
     // check if negative = if negative have a flag
     // length of hex - index of "." = 7 - 3 - 1 = 3
@@ -267,28 +232,33 @@ function fixed(hex){
 
     if (negIndex != -1)
     {
-        negFlag = 1;
-        tempHex = tempHex.substr(1, tempLength);
-        tempLength = tempHex.length;
-        ptIndex = tempHex.indexOf('.');
+        // if negative
+        //alert("negIndex: " + negIndex);
+        negFlag = true;
+        tempHex = tempHex.substr(1, tempLength); // 234.455
+        //alert("new tempHex: "+ tempHex);
+        tempLength = tempHex.length; // 7
+        ptIndex = tempHex.indexOf('.'); // 3
+        //alert("ptIndex: " + ptIndex);
     }
 
-    var cut = tempLength - ptIndex - 1;
-    var firstString = tempHex.substr(0, cut-1);
-    var secondString = tempHex.substr(cut+1, tempLength);
-    alert("firstString: " + firstString);
-    alert("secondString: " + firstString);
-    var firstNum = firstString.substr(0, 1);
-    var middleNum = firstString.substr(1, cut);
+    //var cut = tempLength - ptIndex;
+    var firstString = tempHex.substr(0, ptIndex); // 234
+    var secondString = tempHex.substr(ptIndex+1, tempLength); // 455
+    //alert("cut: " + cut);
+    //alert("firstString: " + firstString);
+    //alert("secondString: " + secondString);
+    var firstNum = firstString.substr(0, 1); // 2
+    var middleNum = firstString.substr(1, ptIndex-1); // 34
     var exponent = ptIndex - 1;
 
-    if(negFlag == 1)
+    if(negFlag)
     {
-        document.getElementById("resultMessage").innerHTML = "-" + firstNum + "." + middleNum + secondString + "E" + exponent;
+        return "-" + firstNum + "." + middleNum + secondString + "E" + exponent;
     }
     else
     {
-        document.getElementById("resultMessage").innerHTML = "-" + firstNum + "." + middleNum + secondString + "E" + exponent;
+        return firstNum + "." + middleNum + secondString + "E" + exponent;
     }
 
     //alert("tempHex is: " + tempHex);
@@ -323,11 +293,14 @@ function main(){
         document.getElementById("resultMessage").innerHTML = "Nothing to compute";
     else if (hex.length != 0)  // convert hex
     {
-        //var S = convH2B(hex);
-        //S = Convert(S);
-        //document.getElementById("resultMessage").innerHTML = S;
+        // if special case don't do anything
+        var S = convH2B(hex);
+        S = Convert(S);
+        alert("S before: " + S);
+        S = fixed(S);
+        document.getElementById("resultMessage").innerHTML = S;
         //alert(hex.length);
-        fixed("12345.5678");
+
         // -2.34455E2
     }
     else  // convert bin
