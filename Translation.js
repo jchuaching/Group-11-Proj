@@ -77,6 +77,7 @@ function BinToDec(binary, len){
  * @returns 
  */
 function Convert(bin){
+    // Special cases
     if(bin === "10000000000000000000000000000000"){
         return "-0.0";
     }
@@ -89,14 +90,15 @@ function Convert(bin){
     if(bin === "01111111100000000000000000000000"){
         return "Positive Infinity";
     }
-    // char[] p = new char[8];
-    // char[] f = new char[152];
-    var sign = false;   // false is positive true is negative
-    var neg  = parseInt(bin[0],10);
 
+    // Check if negative
+    var isNegative = false;   // false is positive true is negative
+    var neg  = parseInt(bin[0],2);
     if(neg==1){
-        sign = true;
+        isNegative = true;
     }
+
+    // Check if NaN
     var j = 0;
     p = "";
     for(i=1;i<9;i++){
@@ -111,52 +113,53 @@ function Convert(bin){
             return "sNaN";
         }
     }
+
     f = "";
     f[0] = '1';
     j=1;
     var power = parseInt(p,2) - 127;
     var pow = power+1;
     var len = 0;
-    if (power <-126 && !sign )
+    if (power <-126 && !isNegative )
     {
         return "denormalized";
     }
-    else if(power<24&&power>-1){
-        for(i=9;i<32;i++){
-            if (pow==j){
+    else if(power < 24 && power > -1){
+        for(i = 9; i < 32; i++){
+            if (pow == j){
                 f[j] = '.';
                 j++;
                 i--;
             }
 
             else{
-            f[j] = bin.charAt(i);
+            f[j] = bin[i];
             j++;}
         }
 
         len = 25;
     } 
     else if(power <= -1){
-        f[0]='.';
+        f[0] = '.';
         len++;
         power++;
-        while (power<=-1){
-            f[len]='0';
+        while (power <= -1){
+            f[len] = '0';
             power++;
             len++;
         }
         f[len]='1';
         len++;
-        for(i=9;i<32;i++){
-                f[len] = bin.charAt(i);
+        for(i=9; i<32; i++){
+                f[len] = bin[i];
                 len++;
         }
     }
     else if (power >= 24){
         f[len]='1';
         len++;
-        for(i=9;i<32;i++){
-            f[len] = bin.charAt(i);
+        for(i=9; i<32; i++){
+            f[len] = bin[i];
             len++;
         }
         power = power-23;
@@ -169,8 +172,10 @@ function Convert(bin){
     }
     var fractional = BinToDec(f,len);
     j=0;
+
+    // Add negative sign if needed
     var out = "";
-    if(sign){
+    if(isNegative){
         out = "-" + fractional;
     }
     else{
@@ -201,8 +206,8 @@ function main(){
     //var bin = "01000001010100101000000000000000";
 
     var bin = document.getElementById("number").value;
-    // var S = Convert(bin);
-    var S = BinToDec(bin, bin.length);
+    var S = Convert(bin);
+    // var S = BinToDec(bin, bin.length);
     // var S = convH2B(bin);
     alert(S);
 }
