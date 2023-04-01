@@ -1,23 +1,4 @@
 /**
- * SavetoFile() function is currently not working. 
- * FileWriter is still a Java class and not a JavaScript class.
- * It still need to be converted to JavaScript.
- * Github Copilot generated code is faulty.
- * @param {*} line 
- */
-function SavetoFile(line) {
-    try {
-        var myWriter = new FileWriter("result.txt");
-        myWriter.write(line);
-        myWriter.close();
-        System.out.println("Successfully wrote to the file.");
-    } catch (e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-    }
-}
-
-/**
  * Recieves a string of hex and converts it to a binary number.
  * @param {*} hex 
  * @returns 
@@ -233,8 +214,6 @@ function main(){
 
     var bin = document.getElementById("number").value;
     var S = Convert(bin);
-    // SavetoFile(S);
-    // console.log(S);
     alert(S);
 }
 
