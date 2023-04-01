@@ -1,7 +1,7 @@
 /**
  * Recieves a string of hex and converts it to a binary number.
- * @param {*} hex 
- * @returns 
+ * @param {*} hex
+ * @returns
  */
 function convH2B(hex) {
     var binary = "";
@@ -40,19 +40,22 @@ function convH2B(hex) {
 
 /**
  * Recieves a string of binary and converts it to a decimal number.
-*/
+ */
 function BinToDec(binary, len){
     pt = binary.indexOf('.');
 
-    if (pt == -1)
+    // If no decimal point is found, then
+    if (pt == -1){
         pt = len;
+    }
 
     intDec = 0, fracDec = 0, twos = 1;
 
     // Convert integral part of binary to decimal
     // equivalent
     for(i = pt - 1; i >= 0; i--){
-        intDec += (binary.charAt(i) - '0') * twos;
+        intDec += parseInt(binary[i], 2) * twos;
+
         twos *= 2;
     }
 
@@ -60,7 +63,7 @@ function BinToDec(binary, len){
     // decimal equivalent
     twos = 2;
     for(i = pt + 1; i < len; i++){
-        fracDec += (binary.charAt(i) - '0') / twos;
+        fracDec += (binary[i] - '0') / twos;
         twos *= 2.0;
     }
 
@@ -70,10 +73,11 @@ function BinToDec(binary, len){
 
 /**
  * Converts a binary number to a decimal number.
- * @param {*} bin 
- * @returns 
+ * @param {*} bin
+ * @returns
  */
 function Convert(bin){
+    // Special cases
     if(bin === "10000000000000000000000000000000"){
         return "-0.0";
     }
@@ -86,14 +90,15 @@ function Convert(bin){
     if(bin === "01111111100000000000000000000000"){
         return "Positive Infinity";
     }
-    // char[] p = new char[8];
-    // char[] f = new char[152];
-    var sign = false;   // false is positive true is negative
-    var neg  = parseInt(bin[0],10);
 
+    // Check if negative
+    var isNegative = false;   // false is positive true is negative
+    var neg  = parseInt(bin[0],2);
     if(neg==1){
-        sign = true;
+        isNegative = true;
     }
+
+    // Check if NaN
     var j = 0;
     p = "";
     for(i=1;i<9;i++){
@@ -108,52 +113,53 @@ function Convert(bin){
             return "sNaN";
         }
     }
+
     f = "";
     f[0] = '1';
     j=1;
     var power = parseInt(p,2) - 127;
     var pow = power+1;
     var len = 0;
-    if (power <-126 && !sign )
+    if (power <-126 && !isNegative )
     {
         return "denormalized";
     }
-    else if(power<24&&power>-1){
-        for(i=9;i<32;i++){
-            if (pow==j){
+    else if(power < 24 && power > -1){
+        for(i = 9; i < 32; i++){
+            if (pow == j){
                 f[j] = '.';
                 j++;
                 i--;
             }
 
             else{
-            f[j] = bin.charAt(i);
-            j++;}
+                f[j] = bin[i];
+                j++;}
         }
 
         len = 25;
-    } 
+    }
     else if(power <= -1){
-        f[0]='.';
+        f[0] = '.';
         len++;
         power++;
-        while (power<=-1){
-            f[len]='0';
+        while (power <= -1){
+            f[len] = '0';
             power++;
             len++;
         }
         f[len]='1';
         len++;
-        for(i=9;i<32;i++){
-                f[len] = bin.charAt(i);
-                len++;
+        for(i=9; i<32; i++){
+            f[len] = bin[i];
+            len++;
         }
     }
     else if (power >= 24){
         f[len]='1';
         len++;
-        for(i=9;i<32;i++){
-            f[len] = bin.charAt(i);
+        for(i=9; i<32; i++){
+            f[len] = bin[i];
             len++;
         }
         power = power-23;
@@ -162,12 +168,14 @@ function Convert(bin){
             power--;
             len++;
         }
-        
+
     }
     var fractional = BinToDec(f,len);
     j=0;
+
+    // Add negative sign if needed
     var out = "";
-    if(sign){
+    if(isNegative){
         out = "-" + fractional;
     }
     else{
@@ -178,12 +186,17 @@ function Convert(bin){
 
 // change element to result id later
 function copyValues() {
-    var copyText = document.getElementById("resultMessage").innerHTML;
+        const copyText = document.getElementById("resultMessage");
+        const range = document.createRange();
+        range.selectNode(copyText);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
 
-    copyText.select();
-    document.execCommand("copy");
-    //document.getElementById("resultMessage").innerHTML ="Copied the text: "
-   // + copyText;
+        // Update the message displayed to the user
+        //document.getElementById("resultMessage").innerHTML = "Copied the text: " + copyText.innerHTML;
+
 
 }
 
@@ -202,7 +215,28 @@ function main(){
     /* get textbox1 and textbox2 = if both have laman, we output sa errror */
     /* if textbox1 has laman = compute for hexadecimal */
     /* if textbox2 has laman = compute for binary */
-    var bin = document.getElementById("textbox1").value;
-    var S = convH2B(bin);
-    alert(S);
+
+    var hex = document.getElementById("textbox1").value.trim();
+    var bin = document.getElementById("textbox2").value.trim();
+
+    alert("hex: " + hex);
+    alert("bin: " + bin);
+
+    if(hex.length != 0  && bin.length != 0)
+        document.getElementById("resultMessage").innerHTML = "Only one input can be computed.";
+    else if(hex.length == 0  && bin.length == 0)
+        document.getElementById("resultMessage").innerHTML = "Nothing to compute";
+    else if (hex.length == 0)  // convert hex
+    {
+        var S = convH2B(hex);
+        document.getElementById("resultMessage").innerHTML = S;
+        alert(S);
+    }
+    else  // convert bin
+    {
+        var S = Convert(bin);
+        document.getElementById("resultMessage").innerHTML = S;
+        alert(S);
+    }
+
 }
