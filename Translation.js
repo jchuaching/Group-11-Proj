@@ -72,45 +72,36 @@ function Convert(bin){
     // var i;
     alert(bin);
 
-    if(bin === "10000000000000000000000000000000")
-    {
+    if(bin === "10000000000000000000000000000000"){
         return "-0.0";
     }
-    if(bin === "00000000000000000000000000000000")
-    {
+    if(bin === "00000000000000000000000000000000"){
         return "0.0";
     }
-    if(bin === "11111111100000000000000000000000")
-    {
+    if(bin === "11111111100000000000000000000000"){
         return "Negative Infinity";
     }
-    if(bin === "01111111100000000000000000000000")
-    {
+    if(bin === "01111111100000000000000000000000"){
         return "Positive Infinity";
     }
     // char[] p = new char[8];
     // char[] f = new char[152];
     var sign = false;   // false is positive true is negative
-    
     var neg  = parseInt(bin[0],10);
 
     if(neg==1){
         sign = true;
-
     }
     var j = 0;
     p = "";
     alert("Here 0");
-    for(i=1;i<9;i++)
-    {
-
+    for(i=1;i<9;i++){
         p[j] = bin[i];
         j++;
     }
     alert("Here 1");
 
-    if(p === "11111111")
-    {
+    if(p === "11111111"){
         if(parseInt(bin[9],10)==1){
             return "qNaN";
         }
