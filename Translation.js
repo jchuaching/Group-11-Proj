@@ -1,4 +1,10 @@
-// function Translation(){
+/**
+ * SavetoFile() function is currently not working. 
+ * FileWriter is still a Java class and not a JavaScript class.
+ * It still need to be converted to JavaScript.
+ * Github Copilot generated code is faulty.
+ * @param {*} line 
+ */
 function SavetoFile(line) {
     try {
         var myWriter = new FileWriter("result.txt");
