@@ -37,6 +37,45 @@ function convH2B(hex) {
     }
     return binary;
 }
+/**
+ * Recieves a string of hex and converts it to a binary number.
+ * @param {*} hex
+ * @returns
+ */
+function convH2B(hex) {
+    var binary = "";
+    var x;
+    var hexDigit; //to represent each digit of the hex
+
+    hex = hex.toUpperCase();
+
+    var conv = {
+        '0': "0000",
+        '1': "0001",
+        '2': "0010",
+        '3': "0011",
+        '4': "0100",
+        '5': "0101",
+        '6': "0110",
+        '7': "0111",
+        '8': "1000",
+        '9': "1001",
+        'A': "1010",
+        'B': "1011",
+        'C': "1100",
+        'D': "1101",
+        'E': "1110",
+        'F': "1111"
+    };
+
+    for (x = 0; x < hex.length; x++) {
+        hexDigit = hex.charAt(x);
+        if (conv[hexDigit] !== undefined){
+            binary += conv[hexDigit];
+        }
+    }
+    return binary;
+}
 
 /**
  * Recieves a string of binary and converts it to a decimal number.
@@ -100,9 +139,9 @@ function Convert(bin){
 
     // Check if NaN
     var j = 0;
-    p = "";
+    var p = "";
     for(i=1;i<9;i++){
-        p[j] = bin[i];
+        p += bin[i];
         j++;
     }
     if(p === "11111111"){
@@ -114,64 +153,71 @@ function Convert(bin){
         }
     }
 
+    // Extract exponent (undoing)
     f = "";
     f[0] = '1';
     j=1;
-    var power = parseInt(p,2) - 127;
-    var pow = power+1;
+    var power = parseInt(p,2) - 127; // e* = e-127
+    var pow = power + 1; //
     var len = 0;
+
+    // Check if denormalized
     if (power <-126 && !isNegative )
     {
         return "denormalized";
     }
+
+    // If Postive exponent and 0
     else if(power < 24 && power > -1){
         for(i = 9; i < 32; i++){
             if (pow == j){
-                f[j] = '.';
+                f += '.';
                 j++;
                 i--;
             }
-
             else{
-                f[j] = bin[i];
+                f += bin[i];
                 j++;}
         }
 
         len = 25;
     }
+
+    // IF Negative exponent
     else if(power <= -1){
-        f[0] = '.';
+        f += '.';
         len++;
         power++;
         while (power <= -1){
-            f[len] = '0';
+            f += '0';
             power++;
             len++;
         }
         f[len]='1';
         len++;
         for(i=9; i<32; i++){
-            f[len] = bin[i];
+            f += bin[i];
             len++;
         }
     }
+    // IF
     else if (power >= 24){
-        f[len]='1';
+        f +='1';
         len++;
         for(i=9; i<32; i++){
-            f[len] = bin[i];
+            f += bin[i];
             len++;
         }
         power = power-23;
         while(power>0){
-            f[len] = 0;
+            f += 0;
             power--;
             len++;
         }
 
     }
-    var fractional = BinToDec(f,len);
-    j=0;
+    var fractional = BinToDec(f,f.length);
+    j = 0;
 
     // Add negative sign if needed
     var out = "";
@@ -196,10 +242,59 @@ function copyValues() {
 
         // Update the message displayed to the user
         //document.getElementById("resultMessage").innerHTML = "Copied the text: " + copyText.innerHTML;
-
-
 }
 
+function fixed(hex){
+    // -234.455
+    // parseInt : data, radix (base 10)
+    var tempHex = hex;
+    var stopVar = 0;
+    var tempLength = tempHex.length;
+    var negIndex = tempHex.indexOf('-');
+    var ptIndex = tempHex.indexOf('.');
+    var negFlag = 0;
+
+    // check if negative = if negative have a flag
+    // length of hex - index of "." = 7 - 3 - 1 = 3
+    // copy the the string starting from 0 to 3  (234)
+    // copy the latter half of the string (455)
+    // parse int (455)
+    // copy the first number
+    // copy the middle numbers
+    // e = 3 - 1 = 2
+    // if negative ("-" + firstnumber + "." + middlenumbers + latterhalfofthestring + "E" + e )
+    // if positive (firstnumber + "." + middlenumbers + latterhalfofthestring + "E" + e )
+
+    if (negIndex != -1)
+    {
+        negFlag = 1;
+        tempHex = tempHex.substr(1, tempLength);
+        tempLength = tempHex.length;
+        ptIndex = tempHex.indexOf('.');
+    }
+
+    var cut = tempLength - ptIndex - 1;
+    var firstString = tempHex.substr(0, cut-1);
+    var secondString = tempHex.substr(cut+1, tempLength);
+    alert("firstString: " + firstString);
+    alert("secondString: " + firstString);
+    var firstNum = firstString.substr(0, 1);
+    var middleNum = firstString.substr(1, cut);
+    var exponent = ptIndex - 1;
+
+    if(negFlag == 1)
+    {
+        document.getElementById("resultMessage").innerHTML = "-" + firstNum + "." + middleNum + secondString + "E" + exponent;
+    }
+    else
+    {
+        document.getElementById("resultMessage").innerHTML = "-" + firstNum + "." + middleNum + secondString + "E" + exponent;
+    }
+
+    //alert("tempHex is: " + tempHex);
+    //alert("length is: " + tempHex.length);
+
+}
 function main(){
     //1111110 exp -1
     //1111111100000000000000000000000
@@ -219,18 +314,21 @@ function main(){
     var hex = document.getElementById("textbox1").value.trim();
     var bin = document.getElementById("textbox2").value.trim();
 
-    alert("hex: " + hex);
-    alert("bin: " + bin);
+    //alert("hex: " + hex);
+    //alert("bin: " + bin);
 
     if(hex.length != 0  && bin.length != 0)
         document.getElementById("resultMessage").innerHTML = "Only one input can be computed.";
     else if(hex.length == 0  && bin.length == 0)
         document.getElementById("resultMessage").innerHTML = "Nothing to compute";
-    else if (hex.length == 0)  // convert hex
+    else if (hex.length != 0)  // convert hex
     {
-        var S = convH2B(hex);
-        document.getElementById("resultMessage").innerHTML = S;
-        alert(S);
+        //var S = convH2B(hex);
+        //S = Convert(S);
+        //document.getElementById("resultMessage").innerHTML = S;
+        //alert(hex.length);
+        fixed("12345.5678");
+        // -2.34455E2
     }
     else  // convert bin
     {
