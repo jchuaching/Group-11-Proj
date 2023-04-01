@@ -100,9 +100,9 @@ function Convert(bin){
 
     // Check if NaN
     var j = 0;
-    p = "";
+    var p = "";
     for(i=1;i<9;i++){
-        p[j] = bin[i];
+        p += bin[i];
         j++;
     }
     if(p === "11111111"){
@@ -128,57 +128,57 @@ function Convert(bin){
         return "denormalized";
     }
     
-    // Postive exponent and 0
+    // If Postive exponent and 0
     else if(power < 24 && power > -1){
         for(i = 9; i < 32; i++){
             if (pow == j){
-                f[j] = '.';
+                f += '.';
                 j++;
                 i--;
             }
             else{
-            f[j] = bin[i];
+            f += bin[i];
             j++;}
         }
 
         len = 25;
     } 
 
-    // Negative exponent
+    // IF Negative exponent
     else if(power <= -1){
-        f[0] = '.';
+        f += '.';
         len++;
         power++;
         while (power <= -1){
-            f[len] = '0';
+            f += '0';
             power++;
             len++;
         }
         f[len]='1';
         len++;
         for(i=9; i<32; i++){
-                f[len] = bin[i];
+                f += bin[i];
                 len++;
         }
     }
-    
+    // IF 
     else if (power >= 24){
-        f[len]='1';
+        f +='1';
         len++;
         for(i=9; i<32; i++){
-            f[len] = bin[i];
+            f += bin[i];
             len++;
         }
         power = power-23;
         while(power>0){
-            f[len] = 0;
+            f += 0;
             power--;
             len++;
         }
         
     }
-    var fractional = BinToDec(f,len);
-    j=0;
+    var fractional = BinToDec(f,f.length);
+    j = 0;
 
     // Add negative sign if needed
     var out = "";
