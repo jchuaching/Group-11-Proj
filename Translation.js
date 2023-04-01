@@ -44,8 +44,10 @@ function convH2B(hex) {
 function BinToDec(binary, len){
     pt = binary.indexOf('.');
 
-    if (pt == -1)
+    // If no decimal point is found, then
+    if (pt == -1){
         pt = len;
+    }
 
     intDec = 0, fracDec = 0, twos = 1;
 
@@ -198,6 +200,7 @@ function main(){
     //var bin = "01000001010100101000000000000000";
 
     var bin = document.getElementById("number").value;
-    var S = Convert(bin);
+    // var S = Convert(bin);
+    var S = convH2B(bin);
     alert(S);
 }
