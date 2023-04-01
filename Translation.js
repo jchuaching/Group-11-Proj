@@ -57,6 +57,9 @@ function convH2B(hex) {
     return binary;
 }
 
+/**
+ * Recieves a string of binary and converts it to a decimal number.
+*/
 function BinToDec(binary, len){
     pt = binary.indexOf('.');
 
@@ -225,5 +228,6 @@ function add(num){
 }
 function sample(){
     var num = document.getElementById("number").value;
-    alert(convH2B(num));
+    var len = num.length;
+    alert(BinToDec(num, len));
 }
