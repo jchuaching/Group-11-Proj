@@ -160,18 +160,18 @@ function Convert(bin){
         
     }
     alert("Here 4");
-    var fractional = BinToDec(new String(f),len);
+    var fractional = BinToDec(f,len);
     j=0;
-
-    var out = new String();
+    var out = "";
+    alert("Here 4.1");
     if(sign){
-        out = "-"+Double.toString(fractional);
+        out = "-" + fractional;
     }
     else{
-            out = Double.toString(fractional);
+        out = fractional;
     }
 
-    alert("Here 4");
+    alert("Here 5");
     return out;
 }
 
