@@ -68,6 +68,11 @@ function BinToDec(binary, len){
     return intDec + fracDec;
 }
 
+/**
+ * Converts a binary number to a decimal number.
+ * @param {*} bin 
+ * @returns 
+ */
 function Convert(bin){
     if(bin === "10000000000000000000000000000000"){
         return "-0.0";
@@ -159,19 +164,15 @@ function Convert(bin){
         }
         
     }
-    alert("Here 4");
     var fractional = BinToDec(f,len);
     j=0;
     var out = "";
-    alert("Here 4.1");
     if(sign){
         out = "-" + fractional;
     }
     else{
         out = fractional;
     }
-
-    alert("Here 5");
     return out;
 }
 
@@ -199,15 +200,4 @@ function main(){
     var bin = document.getElementById("number").value;
     var S = Convert(bin);
     alert(S);
-}
-
-function add(num){
-    num++;
-    return num;
-}
-function sample(){
-    var num = document.getElementById("number").value;
-    var len = num.length;
-    alert(Convert(num));
-    alert("Congrats!");
 }
