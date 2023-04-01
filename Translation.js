@@ -179,6 +179,22 @@ function Convert(bin){
         }
         
     }
+    //System.out.println(new String(p)+"\n"+new String(f)+"\n"+power);
+        //System.out.println(BinToDec(new String(f),len));
+
+    var fractional = BinToDec(new String(f),len);
+    j=0;
+
+    var out = new String();
+    if(sign) {
+        out = "-"+Double.toString(fractional);
+    }
+    else
+        {
+                out = Double.toString(fractional);
+        }
+    //System.out.println(out);//fractional+"x10^"+power);
+    return out;
 }
 
 function main(){
@@ -194,9 +210,17 @@ function main(){
 
     var bin = document.getElementById("number").value;
     var S = Convert(bin);
-    SavetoFile(S);
-    console.log("Hello World!");
-    console.log(S);
+    // SavetoFile(S);
+    //console.log("Hello World!");
+    //console.log(S);
     alert(S);
     //console.log(convH2B("0FDcD000")); //Test translation
+}
+function add(num){
+    num++;
+    return num;
+}
+function sample(){
+    var num = document.getElementById("number").value;
+    alert(add(num));
 }
