@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<script src="Translation.js"></script>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="Translation.js"></script>
-    
+  <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet" />
+  <link href="main.css" rel="stylesheet" />
+  <title>IEEE-754 Binary-32 Floating Point Translator</title>
 </head>
-<body>
-    <!-- On click, action main will run-->
-    <input type="text" name="text" placeholder="only binary number" id="number">
 
-    <button onclick="main()">Run Main</button>
-    <button name="copybutton" onclick="copyValues()">Copy</button>
+<body>
+<div class="webpageBg">
+  <div class="webpageTitleBg"></div>
+  <span class="webpageTitle">IEEE-754 Binary-32 Floating Point Translator</span>
+  <span class="result">Result :</span>
+  <div class="result2"><p name="resultMessage"  id="resultMessage"></p></div>
+  <span class="hexadecimalInput">Hexadecimal Input :</span>
+  <span class="binaryInput">Binary Input :</span>
+  <input type="text" name="textbox1"  id="textbox1" class="textbox1">
+  <input type="text" name="textbox2" id="textbox2" class="textbox2">
+  <button onclick="main()" class="fixeddecButton"></button>
+  <span class="fixedButtonText">Calculate Fixed Decimal</span>
+  <button  onclick="main()" class="floatingdecButton"></button>
+  <span class="floatingButtonText">Calculate Floating Point</span>
+  <div class="separator"></div>
+  <button type="button" onclick="copyValues()" class="clipboardButton"></button>
+  <span class="copyText">Copy to Clipboard</span>
+</div>
 </body>
 </html>

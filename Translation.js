@@ -212,11 +212,32 @@ function main(){
     //00000000000000000000000000000000 0.0
     //var bin = "01000001010100101000000000000000";
 
-    var bin = document.getElementById("number").value;
-    var S = Convert(bin);
-    // var S = BinToDec(bin, bin.length);
-    // var S = convH2B(bin);
+    /* 1 function will be for the fixed  and the othe is for the floating point */
+    /* get textbox1 and textbox2 = if both have laman, we output sa errror */
+    /* if textbox1 has laman = compute for hexadecimal */
+    /* if textbox2 has laman = compute for binary */
 
-    // PSUEDOCHANGE FOR MERGING
-    alert(S);
+    var hex = document.getElementById("textbox1").value.trim();
+    var bin = document.getElementById("textbox2").value.trim();
+
+    alert("hex: " + hex);
+    alert("bin: " + bin);
+
+    if(hex.length != 0  && bin.length != 0)
+        document.getElementById("resultMessage").innerHTML = "Only one input can be computed.";
+    else if(hex.length == 0  && bin.length == 0)
+        document.getElementById("resultMessage").innerHTML = "Nothing to compute";
+    else if (hex.length == 0)  // convert hex
+    {
+        var S = convH2B(hex);
+        document.getElementById("resultMessage").innerHTML = S;
+        alert(S);
+    }
+    else  // convert bin
+    {
+        var S = Convert(bin);
+        document.getElementById("resultMessage").innerHTML = S;
+        alert(S);
+    }
+
 }
