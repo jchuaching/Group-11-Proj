@@ -109,9 +109,9 @@ function Convert(bin){
     }
     alert("Here 1");
 
-    if(new String(p).equals("11111111"))
+    if(p === "11111111")
     {
-        if(Integer.parseInt(Character.toString(bin.charAt(9)),10)==1){
+        if(parseInt(bin[9],10)==1){
             return "qNaN";
         }
         else{
@@ -121,7 +121,7 @@ function Convert(bin){
     alert("Here 2");
     f[0] = '1';
     j=1;
-    var power = parseInt(new String(p),2) - 127;
+    var power = parseInt(p,2) - 127;
     var pow = power+1;
     var len = 0;
     alert("Here 3");
