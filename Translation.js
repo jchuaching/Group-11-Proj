@@ -45,11 +45,10 @@ function convH2B(hex) {
 
     for (x = 0; x < hex.length; x++) {
         hexDigit = hex.charAt(x);
-
-        if (conv[hexDigit] !== undefined)
+        if (conv[hexDigit] !== undefined){
             binary += conv[hexDigit];
+        }
     }
-
     return binary;
 }
 
@@ -214,11 +213,12 @@ function main(){
     // console.log(S);
     alert(S);
 }
+
 function add(num){
     num++;
     return num;
 }
 function sample(){
     var num = document.getElementById("number").value;
-    alert(add(num));
+    alert(convH2B(num));
 }
