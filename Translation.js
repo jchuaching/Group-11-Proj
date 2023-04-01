@@ -111,10 +111,8 @@ function Convert(bin){
     // char[] p = new char[8];
     // char[] f = new char[152];
     var sign = false;   //false is positive true is negative
-    var neg = Integer.parseInt(Character.toString(bin.charAt(0)),10);
-    //Character.toString(bin.charAt(0));
-
-    alert("Here 2");
+    
+    var neg  = parseInt(bin[0],10);
 
     if(neg==1){
         sign = true;
@@ -237,4 +235,5 @@ function sample(){
     var num = document.getElementById("number").value;
     var len = num.length;
     alert(Convert(num));
+    alert("Congrats!");
 }
