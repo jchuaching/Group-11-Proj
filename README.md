@@ -6,7 +6,7 @@ This project is an IEEE-754 Binary-32 floating point translator that includes al
 ## Accessing the IEEE-754 Binary-32 Floating Point Translator
 
 **Accessing through the web:**
-The web-page can be accessed through this link: [TransalationProject](https://jchuaching.github.io/Group-11-Proj/)
+The web-page can be accessed through this link: [TranslationProject](https://jchuaching.github.io/Group-11-Proj/)
 
 **Accessing locally:**
 1. Download the zip file of the project.
