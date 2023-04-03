@@ -127,6 +127,10 @@ body {
   border-bottom-right-radius: 15px;
   overflow: hidden;
 }
+.fixeddecButton:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  cursor: pointer;
+}
 
 .fixedButtonText {
   width: 439px;
@@ -154,6 +158,10 @@ body {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   overflow: hidden;
+}
+.floatingdecButton:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  cursor: pointer;
 }
 
 .floatingButtonText {
@@ -192,6 +200,11 @@ body {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   overflow: hidden;
+}
+
+.clipboardButton:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  cursor: pointer;
 }
 
 .copyText {

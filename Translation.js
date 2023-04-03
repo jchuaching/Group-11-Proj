@@ -1,7 +1,7 @@
 /**
  * Recieves a string of hex and converts it to a binary number.
- * @param {*} hex 
- * @returns 
+ * @param {*} hex
+ * @returns
  */
 function convH2B(hex) {
     var binary = "";
@@ -40,7 +40,7 @@ function convH2B(hex) {
 
 /**
  * Recieves a string of binary and converts it to a decimal number.
-*/
+ */
 function BinToDec(binary, len){
     pt = binary.indexOf('.');
 
@@ -55,7 +55,7 @@ function BinToDec(binary, len){
     // equivalent
     for(i = pt - 1; i >= 0; i--){
         intDec += parseInt(binary[i], 2) * twos;
-        
+
         twos *= 2;
     }
 
@@ -66,15 +66,15 @@ function BinToDec(binary, len){
         fracDec += (binary[i] - '0') / twos;
         twos *= 2.0;
     }
-    
+
     // Add both integral and fractional part
     return intDec + fracDec;
 }
 
 /**
  * Converts a binary number to a decimal number.
- * @param {*} bin 
- * @returns 
+ * @param {*} bin
+ * @returns
  */
 function Convert(bin){
     // Special cases
@@ -119,7 +119,7 @@ function Convert(bin){
     f[0] = '1';
     j=1;
     var power = parseInt(p,2) - 127; // e* = e-127
-    var pow = power + 1; // 
+    var pow = power + 1; //
     var len = 0;
 
     // Check if denormalized
@@ -127,7 +127,7 @@ function Convert(bin){
     {
         return "denormalized";
     }
-    
+
     // If Postive exponent and 0
     else if(power < 24 && power > -1){
         for(i = 9; i < 32; i++){
@@ -137,12 +137,12 @@ function Convert(bin){
                 i--;
             }
             else{
-            f += bin[i];
-            j++;}
+                f += bin[i];
+                j++;}
         }
 
         len = 25;
-    } 
+    }
 
     // IF Negative exponent
     else if(power <= -1){
@@ -157,11 +157,11 @@ function Convert(bin){
         f[len]='1';
         len++;
         for(i=9; i<32; i++){
-                f += bin[i];
-                len++;
+            f += bin[i];
+            len++;
         }
     }
-    // IF 
+    // IF
     else if (power >= 24){
         f +='1';
         len++;
@@ -175,7 +175,7 @@ function Convert(bin){
             power--;
             len++;
         }
-        
+
     }
     var fractional = BinToDec(f,f.length);
     j = 0;
@@ -191,16 +191,80 @@ function Convert(bin){
     return out;
 }
 
+// change element to result id later
 function copyValues() {
-    var copyText = document.getElementById("number");
-    copyText.select();
-    document.execCommand("copy");
-    document.getElementById("number")
-        .innerHTML ="Copied the text: "
-        + copyText.value;
-    alert("Copied the text: " + copyText.value);
+        const copyText = document.getElementById("resultMessage");
+        const range = document.createRange();
+        range.selectNode(copyText);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+
+        // Update the message displayed to the user
+        //document.getElementById("resultMessage").innerHTML = "Copied the text: " + copyText.innerHTML;
 }
 
+function fixed(s){
+    // IF PURO 0 YUNG START NEED ERROR CHECKING
+
+
+    // -234.455
+    // parseInt : data, radix (base 10)
+    // alert(s);
+    var tempHex = s;
+    var stopVar = 0;
+    var tempLength = tempHex.length;
+    var negIndex = tempHex.indexOf('-');
+    var ptIndex = tempHex.indexOf('.');
+    var negFlag = false;
+
+    // check if negative = if negative have a flag
+    // length of hex - index of "." = 7 - 3 - 1 = 3
+    // copy the the string starting from 0 to 3  (234)
+    // copy the latter half of the string (455)
+    // parse int (455)
+    // copy the first number
+    // copy the middle numbers
+    // e = 3 - 1 = 2
+    // if negative ("-" + firstnumber + "." + middlenumbers + latterhalfofthestring + "E" + e )
+    // if positive (firstnumber + "." + middlenumbers + latterhalfofthestring + "E" + e )
+
+    if (negIndex != -1)
+    {
+        // if negative
+        //alert("negIndex: " + negIndex);
+        negFlag = true;
+        tempHex = tempHex.substr(1, tempLength); // 234.455
+        //alert("new tempHex: "+ tempHex);
+        tempLength = tempHex.length; // 7
+        ptIndex = tempHex.indexOf('.'); // 3
+        //alert("ptIndex: " + ptIndex);
+    }
+
+    //var cut = tempLength - ptIndex;
+    var firstString = tempHex.substr(0, ptIndex); // 234
+    var secondString = tempHex.substr(ptIndex+1, tempLength); // 455
+    //alert("cut: " + cut);
+    //alert("firstString: " + firstString);
+    //alert("secondString: " + secondString);
+    var firstNum = firstString.substr(0, 1); // 2
+    var middleNum = firstString.substr(1, ptIndex-1); // 34
+    var exponent = ptIndex - 1;
+
+    if(negFlag)
+    {
+        return "-" + firstNum + "." + middleNum + secondString + "E" + exponent;
+    }
+    else
+    {
+        return firstNum + "." + middleNum + secondString + "E" + exponent;
+    }
+
+    //alert("tempHex is: " + tempHex);
+    //alert("length is: " + tempHex.length);
+
+}
 function main(){
     //1111110 exp -1
     //1111111100000000000000000000000
@@ -220,18 +284,24 @@ function main(){
     var hex = document.getElementById("textbox1").value.trim();
     var bin = document.getElementById("textbox2").value.trim();
 
-    alert("hex: " + hex);
-    alert("bin: " + bin);
+    //alert("hex: " + hex);
+    //alert("bin: " + bin);
 
     if(hex.length != 0  && bin.length != 0)
         document.getElementById("resultMessage").innerHTML = "Only one input can be computed.";
     else if(hex.length == 0  && bin.length == 0)
         document.getElementById("resultMessage").innerHTML = "Nothing to compute";
-    else if (hex.length == 0)  // convert hex
+    else if (hex.length != 0)  // convert hex
     {
+        // if special case don't do anything
         var S = convH2B(hex);
+        S = Convert(S);
+        alert("S before: " + S);
+        S = fixed(S);
         document.getElementById("resultMessage").innerHTML = S;
-        alert(S);
+        //alert(hex.length);
+
+        // -2.34455E2
     }
     else  // convert bin
     {
