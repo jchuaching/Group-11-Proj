@@ -43,10 +43,10 @@ function HexToBinary(hex) {
 
 function BinaryToFloat(bin) {
     if(bin === "10000000000000000000000000000000"){
-        return "Special Case -0.0";
+        return "Special Case -0 (Negative Zero)";
     }
     if(bin === "00000000000000000000000000000000"){
-        return "Special Case 0.0";
+        return "Special Case +0 (Positive Zero)";
     }
     if(bin === "11111111100000000000000000000000"){
         return "Special Case Negative Infinity";
