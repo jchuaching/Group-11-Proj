@@ -54,17 +54,15 @@ function BinaryToFloat(bin) {
     if(bin === "01111111100000000000000000000000"){
         return "Special Case Positive Infinity";
     }
-
     
     var sign;                       // Extract sign bit
-    if (bin.charAt(0) == '1')       //check the sign of the first bit
-        sign = -1;                  //sign is negative
+    if (bin.charAt(0) == '1')       // check the sign of the first bit
+        sign = -1;                  // sign is negative
     else
-        sign = 1;                   //means sign is positive
-
+        sign = 1;                   // sign is positive
     
     var exponentBits = bin.substr(1, 8);    // get exponent bits and calculate actual exponent
-    if (exponentBits == "11111111") {       //special cases
+    if (exponentBits == "11111111") {       // special cases
         if (parseInt(bin[9], 10) == 1)
             return "Special Case qNaN";
         else
@@ -83,12 +81,12 @@ function BinaryToFloat(bin) {
     var exponent = parseInt(exponentBits, 2) - 127;
     var mantissaBits = bin.substr(9);       // Extract mantissa bits and add implicit leading bit
     console.log("Number of mantissa bits " + mantissaBits);
-    var mantissa = 1;                       //refers to 1 before decimal point
+    var mantissa = 1;                       // refers to 1 before decimal point
 
     //loops through mantissa and if it is 1 gets 2 ^ -1 * i of that and adds it to var mantissa
     for (var i = 1; i <= mantissaBits.length; i++) {
         if (mantissaBits.charAt(i-1) === '1') {
-            mantissa += Math.pow(2, -1 * i);        //i + 1 is necessary because first bit starts at 0
+            mantissa += Math.pow(2, -1 * i);        // i + 1 is necessary because first bit starts at 0
         }
     }
 
