@@ -236,13 +236,13 @@ function HexToBinary(hex) {
     return binary;
 }
 
-function fixed(s){
+function fixed(floatingDecimal){
     // IF PURO 0 YUNG START NEED ERROR CHECKING
 
 
     // -234.455
     // parseInt : data, radix (base 10)
-    var tempHex = s;
+    var tempHex = floatingDecimal;
     var stopVar = 0;
     var tempLength = tempHex.length;
     var negIndex = tempHex.indexOf('-');
