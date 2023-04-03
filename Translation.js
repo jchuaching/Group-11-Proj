@@ -30,7 +30,7 @@ function main(){
         document.getElementById("resultMessage").innerHTML = "Nothing to compute";
     else if (hex.length != 0){  // Translator hex
         // if special case don't do anything
-        var S = convH2B(hex);
+        var S = HexToBinary(hex);
         S = Translator(S);
         alert("S before: " + S);
         S = fixed(S);
@@ -201,7 +201,7 @@ function BinaryToDec(binary, len){
  * @param {*} hex
  * @returns
  */
-function convH2B(hex) {
+function HexToBinary(hex) {
     var binary = "";
     var x;
     var hexDigit; //to represent each digit of the hex
@@ -242,7 +242,6 @@ function fixed(s){
 
     // -234.455
     // parseInt : data, radix (base 10)
-    // alert(s);
     var tempHex = s;
     var stopVar = 0;
     var tempLength = tempHex.length;
