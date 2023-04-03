@@ -124,7 +124,7 @@ function FloatingToFixed(s){
         }
     }
     else {
-        while (s > 10) { 
+        while (s >= 10) { 
             exponent++;
             s = s / 10;
         }
