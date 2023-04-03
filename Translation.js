@@ -14,7 +14,7 @@ function main(){
     //11111111111010000000000000000000 qNaN
     //10000000000000000000000000000000 -0.0
     //00000000000000000000000000000000 0.0
-    //var bin = "01000001010100101000000000000000";
+    //var binary = "01000001010100101000000000000000";
 
     /* 1 function will be for the fixed  and the othe is for the floating point */
     /* get textbox1 and textbox2 = if both have laman, we output sa errror */
@@ -22,56 +22,51 @@ function main(){
     /* if textbox2 has laman = compute for binary */
 
     var hex = document.getElementById("textbox1").value.trim();
-    var bin = document.getElementById("textbox2").value.trim();
+    var binary = document.getElementById("textbox2").value.trim();
 
-    if(hex.length != 0  && bin.length != 0)
+    if(hex.length != 0  && binary.length != 0)
         document.getElementById("resultMessage").innerHTML = "Only one input can be computed.";
-    else if(hex.length == 0  && bin.length == 0)
+    else if(hex.length == 0  && binary.length == 0)
         document.getElementById("resultMessage").innerHTML = "Nothing to compute";
-    else if (hex.length != 0)  // Translator hex
-    {
+    else if (hex.length != 0){  // Translator hex
         // if special case don't do anything
         var S = convH2B(hex);
         S = Translator(S);
         alert("S before: " + S);
         S = fixed(S);
         document.getElementById("resultMessage").innerHTML = S;
-        //alert(hex.length);
 
-        // -2.34455E2
     }
-    else  // Translator bin
-    {
-        var S = Translator(bin);
+    else{  // Translator binary
+        var S = Translator(binary);
         document.getElementById("resultMessage").innerHTML = S;
-        alert(S);
     }
 
 }
 
 /**
  * Translates a binary number to a decimal number.
- * @param {*} bin
+ * @param {*} binary
  * @returns
  */
-function Translator(bin){
+function Translator(binary){
     // Special cases
-    if(bin === "10000000000000000000000000000000"){
+    if(binary === "10000000000000000000000000000000"){
         return "-0.0";
     }
-    if(bin === "00000000000000000000000000000000"){
+    if(binary === "00000000000000000000000000000000"){
         return "0.0";
     }
-    if(bin === "11111111100000000000000000000000"){
+    if(binary === "11111111100000000000000000000000"){
         return "Negative Infinity";
     }
-    if(bin === "01111111100000000000000000000000"){
+    if(binary === "01111111100000000000000000000000"){
         return "Positive Infinity";
     }
 
     // Check if negative
     var isNegative = false;   // false is positive true is negative
-    var neg  = parseInt(bin[0],2);
+    var neg  = parseInt(binary[0],2);
     if(neg==1){
         isNegative = true;
     }
@@ -80,11 +75,11 @@ function Translator(bin){
     var j = 0;
     var p = "";
     for(i=1;i<9;i++){
-        p += bin[i];
+        p += binary[i];
         j++;
     }
     if(p === "11111111"){
-        if(parseInt(bin[9],10)==1){
+        if(parseInt(binary[9],10)==1){
             return "qNaN";
         }
         else{
@@ -115,7 +110,7 @@ function Translator(bin){
                 i--;
             }
             else{
-                f += bin[i];
+                f += binary[i];
                 j++;}
         }
 
@@ -135,7 +130,7 @@ function Translator(bin){
         f[len]='1';
         len++;
         for(i=9; i<32; i++){
-            f += bin[i];
+            f += binary[i];
             len++;
         }
     }
@@ -143,7 +138,7 @@ function Translator(bin){
         f +='1';
         len++;
         for(i=9; i<32; i++){
-            f += bin[i];
+            f += binary[i];
             len++;
         }
         power = power-23;
@@ -154,7 +149,7 @@ function Translator(bin){
         }
 
     }
-    var fractional = BinToDec(f,f.length);
+    var fractional = BinaryToDec(f,f.length);
     j = 0;
 
     // Add negative sign if needed
@@ -171,7 +166,7 @@ function Translator(bin){
 /**
  * Recieves a string of binary and Translates it to a decimal number.
  */
-function BinToDec(binary, len){
+function BinaryToDec(binary, len){
     pt = binary.indexOf('.');
 
     // If no decimal point is found, then
