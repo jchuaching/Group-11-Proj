@@ -1,3 +1,10 @@
+/**
+ * IEEE-754 Binary-32 floating point translator (including all special cases)
+ *  Input: 8-digit hex input or 32-bit binary input (provide a separator for various sections of the input)
+ *  Output: 
+ *      (1) Decimal (provide an option for the user to choose between fixed or floating point) 
+ *      (2) with an option to paste the result in notepad
+ */
 function main(){
     //1111110 exp -1
     //1111111100000000000000000000000
@@ -21,11 +28,11 @@ function main(){
         document.getElementById("resultMessage").innerHTML = "Only one input can be computed.";
     else if(hex.length == 0  && bin.length == 0)
         document.getElementById("resultMessage").innerHTML = "Nothing to compute";
-    else if (hex.length != 0)  // convert hex
+    else if (hex.length != 0)  // Translator hex
     {
         // if special case don't do anything
         var S = convH2B(hex);
-        S = Convert(S);
+        S = Translator(S);
         alert("S before: " + S);
         S = fixed(S);
         document.getElementById("resultMessage").innerHTML = S;
@@ -33,9 +40,9 @@ function main(){
 
         // -2.34455E2
     }
-    else  // convert bin
+    else  // Translator bin
     {
-        var S = Convert(bin);
+        var S = Translator(bin);
         document.getElementById("resultMessage").innerHTML = S;
         alert(S);
     }
@@ -43,11 +50,11 @@ function main(){
 }
 
 /**
- * Converts a binary number to a decimal number.
+ * Translates a binary number to a decimal number.
  * @param {*} bin
  * @returns
  */
-function Convert(bin){
+function Translator(bin){
     // Special cases
     if(bin === "10000000000000000000000000000000"){
         return "-0.0";
@@ -162,7 +169,7 @@ function Convert(bin){
 }
 
 /**
- * Recieves a string of binary and converts it to a decimal number.
+ * Recieves a string of binary and Translates it to a decimal number.
  */
 function BinToDec(binary, len){
     pt = binary.indexOf('.');
@@ -174,7 +181,7 @@ function BinToDec(binary, len){
 
     intDec = 0, fracDec = 0, twos = 1;
 
-    // Convert integral part of binary to decimal
+    // Translator integral part of binary to decimal
     // equivalent
     for(i = pt - 1; i >= 0; i--){
         intDec += parseInt(binary[i], 2) * twos;
@@ -182,7 +189,7 @@ function BinToDec(binary, len){
         twos *= 2;
     }
 
-    // Convert fractional part of binary to
+    // Translator fractional part of binary to
     // decimal equivalent
     twos = 2;
     for(i = pt + 1; i < len; i++){
@@ -195,7 +202,7 @@ function BinToDec(binary, len){
 }
 
 /**
- * Recieves a string of hex and converts it to a binary number.
+ * Recieves a string of hex and Translates it to a binary number.
  * @param {*} hex
  * @returns
  */
