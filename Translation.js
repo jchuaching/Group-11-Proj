@@ -17,9 +17,6 @@ function main(){
     var hex = document.getElementById("textbox1").value.trim();
     var bin = document.getElementById("textbox2").value.trim();
 
-    //alert("hex: " + hex);
-    //alert("bin: " + bin);
-
     if(hex.length != 0  && bin.length != 0)
         document.getElementById("resultMessage").innerHTML = "Only one input can be computed.";
     else if(hex.length == 0  && bin.length == 0)
@@ -93,7 +90,7 @@ function Convert(bin){
     f[0] = '1';
     j=1;
     var power = parseInt(p,2) - 127; // e* = e-127
-    var pow = power + 1; //
+    var pow = power + 1;
     var len = 0;
 
     // Check if denormalized
@@ -135,7 +132,6 @@ function Convert(bin){
             len++;
         }
     }
-    // IF
     else if (power >= 24){
         f +='1';
         len++;
@@ -300,7 +296,4 @@ function copyValues() {
     window.getSelection().addRange(range);
     document.execCommand("copy");
     window.getSelection().removeAllRanges();
-
-    // Update the message displayed to the user
-    //document.getElementById("resultMessage").innerHTML = "Copied the text: " + copyText.innerHTML;
 }
