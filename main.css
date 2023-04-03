@@ -126,23 +126,15 @@ body {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   overflow: hidden;
+  color: rgba(255,255,255,1);
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 25px;
+  text-align: center;
 }
 .fixeddecButton:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   cursor: pointer;
-}
-
-.fixedButtonText {
-  width: 439px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 590px;
-  left: 257px;
-  font-family: Livvic;
-  font-weight: Bold;
-  font-size: 25px;
-  opacity: 1;
-  text-align: center;
 }
 
 .floatingdecButton {
@@ -158,23 +150,16 @@ body {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   overflow: hidden;
-}
-.floatingdecButton:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  cursor: pointer;
-}
-
-.floatingButtonText {
-  width: 439px;
   color: rgba(255,255,255,1);
-  position: absolute;
-  top: 590px;
-  left: 748px;
   font-family: Livvic;
   font-weight: Bold;
   font-size: 25px;
-  opacity: 1;
   text-align: center;
+}
+
+.floatingdecButton:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  cursor: pointer;
 }
 
 .separator {
@@ -200,24 +185,16 @@ body {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   overflow: hidden;
+  color: rgba(255,255,255,1);
+  font-family: Livvic;
+  font-weight: Bold;
+  font-size: 25px;
+  text-align: center;
 }
 
 .clipboardButton:hover{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   cursor: pointer;
-}
-
-.copyText {
-  width: 439px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 668px;
-  left: 503px;
-  font-family: Livvic;
-  font-weight: Bold;
-  font-size: 25px;
-  opacity: 1;
-  text-align: center;
 }
 
 .result2 {
