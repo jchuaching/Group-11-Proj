@@ -150,7 +150,7 @@ function fixedmain(){
         document.getElementById("resultMessage").innerHTML = "Only one input field should be filled.";
     
     else if(hex.length == 0  && bin.length == 0)
-        document.getElementById("resultMessage").innerHTML = "One of the input field should be filled.";
+        document.getElementById("resultMessage").innerHTML = "One of the input fields should be filled.";
     
     else if (hex.length != 0) {             // convert hexadecimal
         if(hex.length == 8) {
@@ -213,7 +213,7 @@ function floatingpointmain(){
         document.getElementById("resultMessage").innerHTML = "Only one input field should be filled.";
     
     else if(hex.length == 0  && bin.length == 0)
-        document.getElementById("resultMessage").innerHTML = "One of the input field should be filled.";
+        document.getElementById("resultMessage").innerHTML = "One of the input fields should be filled.";
     
     else if (hex.length != 0) {                  // convert hex
         if(hex.length == 8) {
