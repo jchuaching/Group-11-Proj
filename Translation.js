@@ -75,7 +75,7 @@ function BinaryToFloat(bin) {
         var mantissaBits = bin.substr(9);
 
         if(mantissaBits.includes("1")) {      //mantissaBits != "00000000000000000000000"
-            return "Special Case denormalized";
+            return "Special Case Denormalized";
         }
 
     }
