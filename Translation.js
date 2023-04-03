@@ -1,7 +1,7 @@
 /**
  * IEEE-754 Binary-32 floating point translator (including all special cases)
- *  Input: 8-digit hex input or 32-bit binary input (provide a separator for various sections of the input)
- *  Output: 
+ *   Input: 8-digit hex input or 32-bit binary input (provide a separator for various sections of the input)
+ *   Output: 
  *      (1) Decimal (provide an option for the user to choose between fixed or floating point) 
  *      (2) with an option to paste the result in notepad
  */
