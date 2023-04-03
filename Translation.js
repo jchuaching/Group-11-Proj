@@ -32,7 +32,6 @@ function main(){
         // if special case don't do anything
         var S = HexToBinary(hex);
         S = Translator(S);
-        alert("S before: " + S);
         S = fixed(S);
         document.getElementById("resultMessage").innerHTML = S;
 
@@ -72,11 +71,11 @@ function Translator(binary){
     }
 
     // Check if NaN
-    var j = 0;
+    var bitPointer = 0;
     var exponentBits = "";
     for(i=1; i<9; i++){
         exponentBits += binary[i];
-        j++;
+        bitPointer++;
     }
     if(exponentBits === "11111111"){
         if(parseInt(binary[9],10)==1){
@@ -86,12 +85,12 @@ function Translator(binary){
             return "sNaN";
         }
     }
-
+    
     // Extract exponent (undoing)
-    var translatedBinary = "";
+    translatedBinary = "";
     translatedBinary[0] = '1';
-    j=1;
-    var power = parseInt(p, 2) - 127; // e* = e-127
+    bitPointer = 1;
+    var power = parseInt(exponentBits, 2) - 127; // e* = e-127
     var pow = power + 1;
     var len = 0;
 
@@ -103,19 +102,19 @@ function Translator(binary){
     // If Postive exponent and 0
     else if(power < 24 && power > -1){
         for(i = 9; i < 32; i++){
-            if (pow == j){
+            if (pow == bitPointer){
                 translatedBinary += '.';
-                j++;
+                bitPointer++;
                 i--;
             }
             else{
                 translatedBinary += binary[i];
-                j++;}
+                bitPointer++;}
         }
 
         len = 25;
     }
-
+    
     // IF Negative exponent
     else if(power <= -1){
         translatedBinary += '.';
@@ -148,9 +147,9 @@ function Translator(binary){
         }
 
     }
+
     // Convert translatedBinary to decimal
     var fractional = BinaryToDec(translatedBinary,translatedBinary.length);
-    j = 0;
 
     // Add negative sign if needed
     var out = "";
@@ -282,10 +281,6 @@ function fixed(floatingDecimal){
     else{
         return firstNum + "." + middleNum + secondString + "E" + exponent;
     }
-
-    //alert("tempHex is: " + tempHex);
-    //alert("length is: " + tempHex.length);
-
 }
 
 // change element to result id later
