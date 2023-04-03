@@ -66,19 +66,19 @@ function Translator(binary){
 
     // Check if negative
     var isNegative = false;   // false is positive true is negative
-    var neg  = parseInt(binary[0],2);
-    if(neg==1){
+    var sign  = parseInt(binary[0],2);
+    if(sign == 1){
         isNegative = true;
     }
 
     // Check if NaN
     var j = 0;
-    var p = "";
-    for(i=1;i<9;i++){
-        p += binary[i];
+    var exponentBits = "";
+    for(i=1; i<9; i++){
+        exponentBits += binary[i];
         j++;
     }
-    if(p === "11111111"){
+    if(exponentBits === "11111111"){
         if(parseInt(binary[9],10)==1){
             return "qNaN";
         }
@@ -88,16 +88,15 @@ function Translator(binary){
     }
 
     // Extract exponent (undoing)
-    f = "";
-    f[0] = '1';
+    var translatedBinary = "";
+    translatedBinary[0] = '1';
     j=1;
-    var power = parseInt(p,2) - 127; // e* = e-127
+    var power = parseInt(p, 2) - 127; // e* = e-127
     var pow = power + 1;
     var len = 0;
 
     // Check if denormalized
-    if (power <-126 && !isNegative )
-    {
+    if (power <-126 && !isNegative ){
         return "denormalized";
     }
 
@@ -105,12 +104,12 @@ function Translator(binary){
     else if(power < 24 && power > -1){
         for(i = 9; i < 32; i++){
             if (pow == j){
-                f += '.';
+                translatedBinary += '.';
                 j++;
                 i--;
             }
             else{
-                f += binary[i];
+                translatedBinary += binary[i];
                 j++;}
         }
 
@@ -119,37 +118,38 @@ function Translator(binary){
 
     // IF Negative exponent
     else if(power <= -1){
-        f += '.';
+        translatedBinary += '.';
         len++;
         power++;
         while (power <= -1){
-            f += '0';
+            translatedBinary += '0';
             power++;
             len++;
         }
-        f[len]='1';
+        translatedBinary[len]='1';
         len++;
         for(i=9; i<32; i++){
-            f += binary[i];
+            translatedBinary += binary[i];
             len++;
         }
     }
     else if (power >= 24){
-        f +='1';
+        translatedBinary +='1';
         len++;
         for(i=9; i<32; i++){
-            f += binary[i];
+            translatedBinary += binary[i];
             len++;
         }
         power = power-23;
         while(power>0){
-            f += 0;
+            translatedBinary += 0;
             power--;
             len++;
         }
 
     }
-    var fractional = BinaryToDec(f,f.length);
+    // Convert translatedBinary to decimal
+    var fractional = BinaryToDec(translatedBinary,translatedBinary.length);
     j = 0;
 
     // Add negative sign if needed
