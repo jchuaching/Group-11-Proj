@@ -233,31 +233,23 @@ function fixed(s){
     if (negIndex != -1)
     {
         // if negative
-        //alert("negIndex: " + negIndex);
         negFlag = true;
         tempHex = tempHex.substr(1, tempLength); // 234.455
-        //alert("new tempHex: "+ tempHex);
         tempLength = tempHex.length; // 7
         ptIndex = tempHex.indexOf('.'); // 3
-        //alert("ptIndex: " + ptIndex);
     }
 
     //var cut = tempLength - ptIndex;
     var firstString = tempHex.substr(0, ptIndex); // 234
     var secondString = tempHex.substr(ptIndex+1, tempLength); // 455
-    //alert("cut: " + cut);
-    //alert("firstString: " + firstString);
-    //alert("secondString: " + secondString);
     var firstNum = firstString.substr(0, 1); // 2
     var middleNum = firstString.substr(1, ptIndex-1); // 34
     var exponent = ptIndex - 1;
 
-    if(negFlag)
-    {
+    if(negFlag){
         return "-" + firstNum + "." + middleNum + secondString + "E" + exponent;
     }
-    else
-    {
+    else{
         return firstNum + "." + middleNum + secondString + "E" + exponent;
     }
 
