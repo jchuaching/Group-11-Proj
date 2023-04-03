@@ -150,17 +150,28 @@ function fixedmain(){
         document.getElementById("resultMessage").innerHTML = "Only one input field should be filled.";
     
     else if(hex.length == 0  && bin.length == 0)
-        document.getElementById("resultMessage").innerHTML = "Input field empty.";
+        document.getElementById("resultMessage").innerHTML = "One of the input field should be filled.";
     
     else if (hex.length != 0) {             // convert hexadecimal
         if(hex.length == 8) {
-            var S = HexToBinary(hex);
-            S = BinaryToFloat(S);
             
-            if (typeof (S) == 'number') {   // if not special case, convert to fixed
-                S = FloatingToFixed(S);
+            // if string contains not in 0-9, a-f, and A-F (error)
+            let text = hex;
+            let pattern1 = /[^0-9,^a-f,^A-F]/g;
+            let result1 = text.match(pattern1); // result is null if correct
+
+            if(result1 != null) {
+                document.getElementById("resultMessage").innerHTML = "Hex input is invalid.";
             }
-            document.getElementById("resultMessage").innerHTML = S;
+            else {
+                var S = HexToBinary(hex);
+                S = BinaryToFloat(S);
+                
+                if (typeof (S) == 'number') {   // if not special case, convert to fixed
+                    S = FloatingToFixed(S);
+                }
+                document.getElementById("resultMessage").innerHTML = S;
+            }
         }
         else {
             document.getElementById("resultMessage").innerHTML = "8-Digit Hex Input only.";
@@ -169,12 +180,23 @@ function fixedmain(){
 
     else {                                  // convert binary
         if(bin.length == 32) {
-            var S = BinaryToFloat(bin);
+            
+            // if string contains not in 0-1 (error)
+            let text = bin;
+            let pattern1 = /[^0-1]/g;
+            let result1 = text.match(pattern1); // result is null if correct
 
-            if (typeof (S) == 'number') {   // if not special case, convert to fixed
-                S = FloatingToFixed(S);
+            if(result1 != null) {
+                document.getElementById("resultMessage").innerHTML = "Binary input is invalid.";
             }
-            document.getElementById("resultMessage").innerHTML = S;
+            else {
+                var S = BinaryToFloat(bin);
+
+                if (typeof (S) == 'number') {   // if not special case, convert to fixed
+                    S = FloatingToFixed(S);
+                }
+                document.getElementById("resultMessage").innerHTML = S;
+            }
         }
         else {
             document.getElementById("resultMessage").innerHTML = "32-Bit Binary Input only.";
@@ -191,19 +213,29 @@ function floatingpointmain(){
         document.getElementById("resultMessage").innerHTML = "Only one input field should be filled.";
     
     else if(hex.length == 0  && bin.length == 0)
-        document.getElementById("resultMessage").innerHTML = "Input field empty.";
+        document.getElementById("resultMessage").innerHTML = "One of the input field should be filled.";
     
     else if (hex.length != 0) {                  // convert hex
         if(hex.length == 8) {
-            var S = HexToBinary(hex);
-            S = BinaryToFloat(S);
+            // if string contains not in 0-9, a-f, and A-F (error)
+            let text = hex;
+            let pattern1 = /[^0-9,^a-f,^A-F]/g;
+            let result1 = text.match(pattern1); // result is null if correct
 
-            if (typeof (S) == 'number') {
-                S = S + "";
-                if(!S.includes("."))
-                    S = S + ".0";
+            if(result1 != null) {
+                document.getElementById("resultMessage").innerHTML = "Hex input is invalid.";
             }
-            document.getElementById("resultMessage").innerHTML = S;
+            else {
+                var S = HexToBinary(hex);
+                S = BinaryToFloat(S);
+
+                if (typeof (S) == 'number') {
+                    S = S + "";
+                    if(!S.includes("."))
+                        S = S + ".0";
+                }
+                document.getElementById("resultMessage").innerHTML = S;
+            }
         }
         else {
             document.getElementById("resultMessage").innerHTML = "8-Digit Hex Input only.";
@@ -211,14 +243,25 @@ function floatingpointmain(){
     }
     else {                                      // convert binary
         if(bin.length==32) {
-            var S = BinaryToFloat(bin);
+            
+            // if string contains not in 0-1 (error)
+            let text = bin;
+            let pattern1 = /[^0-1]/g;
+            let result1 = text.match(pattern1); // result is null if correct
 
-            if (typeof (S) == 'number') {
-                S = S + "";
-                if(!S.includes("."))
-                    S = S + ".0";
+            if(result1 != null) {
+                document.getElementById("resultMessage").innerHTML = "Binary input is invalid.";
             }
-            document.getElementById("resultMessage").innerHTML = S;
+            else {
+                var S = BinaryToFloat(bin);
+
+                if (typeof (S) == 'number') {
+                    S = S + "";
+                    if(!S.includes("."))
+                        S = S + ".0";
+                }
+                document.getElementById("resultMessage").innerHTML = S;
+            }
         }
         else {
             document.getElementById("resultMessage").innerHTML = "32-Bit Binary Input only.";
