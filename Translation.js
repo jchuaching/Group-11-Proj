@@ -1,74 +1,48 @@
-/**
- * Recieves a string of hex and converts it to a binary number.
- * @param {*} hex
- * @returns
- */
-function convH2B(hex) {
-    var binary = "";
-    var x;
-    var hexDigit; //to represent each digit of the hex
+function main(){
+    //1111110 exp -1
+    //1111111100000000000000000000000
+    //00000100000000000000000000000000
+    //00000000001010000000000000000000 denormalized
+    //11111111101010000000000000000000 sNaN
+    //11111111111010000000000000000000 qNaN
+    //10000000000000000000000000000000 -0.0
+    //00000000000000000000000000000000 0.0
+    //var bin = "01000001010100101000000000000000";
 
-    hex = hex.toUpperCase();
+    /* 1 function will be for the fixed  and the othe is for the floating point */
+    /* get textbox1 and textbox2 = if both have laman, we output sa errror */
+    /* if textbox1 has laman = compute for hexadecimal */
+    /* if textbox2 has laman = compute for binary */
 
-    var conv = {
-        '0': "0000",
-        '1': "0001",
-        '2': "0010",
-        '3': "0011",
-        '4': "0100",
-        '5': "0101",
-        '6': "0110",
-        '7': "0111",
-        '8': "1000",
-        '9': "1001",
-        'A': "1010",
-        'B': "1011",
-        'C': "1100",
-        'D': "1101",
-        'E': "1110",
-        'F': "1111"
-    };
+    var hex = document.getElementById("textbox1").value.trim();
+    var bin = document.getElementById("textbox2").value.trim();
 
-    for (x = 0; x < hex.length; x++) {
-        hexDigit = hex.charAt(x);
-        if (conv[hexDigit] !== undefined){
-            binary += conv[hexDigit];
-        }
+    //alert("hex: " + hex);
+    //alert("bin: " + bin);
+
+    if(hex.length != 0  && bin.length != 0)
+        document.getElementById("resultMessage").innerHTML = "Only one input can be computed.";
+    else if(hex.length == 0  && bin.length == 0)
+        document.getElementById("resultMessage").innerHTML = "Nothing to compute";
+    else if (hex.length != 0)  // convert hex
+    {
+        // if special case don't do anything
+        var S = convH2B(hex);
+        S = Convert(S);
+        alert("S before: " + S);
+        S = fixed(S);
+        document.getElementById("resultMessage").innerHTML = S;
+        //alert(hex.length);
+
+        // -2.34455E2
     }
-    return binary;
-}
-
-/**
- * Recieves a string of binary and converts it to a decimal number.
- */
-function BinToDec(binary, len){
-    pt = binary.indexOf('.');
-
-    // If no decimal point is found, then
-    if (pt == -1){
-        pt = len;
+    else  // convert bin
+    {
+        var S = Convert(bin);
+        document.getElementById("resultMessage").innerHTML = S;
+        alert(S);
     }
 
-    intDec = 0, fracDec = 0, twos = 1;
-
-    // Convert integral part of binary to decimal
-    // equivalent
-    for(i = pt - 1; i >= 0; i--){
-        intDec += parseInt(binary[i], 2) * twos;
-
-        twos *= 2;
-    }
-
-    // Convert fractional part of binary to
-    // decimal equivalent
-    twos = 2;
-    for(i = pt + 1; i < len; i++){
-        fracDec += (binary[i] - '0') / twos;
-        twos *= 2.0;
-    }
-
-    // Add both integral and fractional part
-    return intDec + fracDec;
 }
 
 /**
@@ -191,18 +165,77 @@ function Convert(bin){
     return out;
 }
 
-// change element to result id later
-function copyValues() {
-        const copyText = document.getElementById("resultMessage");
-        const range = document.createRange();
-        range.selectNode(copyText);
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
-        document.execCommand("copy");
-        window.getSelection().removeAllRanges();
+/**
+ * Recieves a string of binary and converts it to a decimal number.
+ */
+function BinToDec(binary, len){
+    pt = binary.indexOf('.');
 
-        // Update the message displayed to the user
-        //document.getElementById("resultMessage").innerHTML = "Copied the text: " + copyText.innerHTML;
+    // If no decimal point is found, then
+    if (pt == -1){
+        pt = len;
+    }
+
+    intDec = 0, fracDec = 0, twos = 1;
+
+    // Convert integral part of binary to decimal
+    // equivalent
+    for(i = pt - 1; i >= 0; i--){
+        intDec += parseInt(binary[i], 2) * twos;
+
+        twos *= 2;
+    }
+
+    // Convert fractional part of binary to
+    // decimal equivalent
+    twos = 2;
+    for(i = pt + 1; i < len; i++){
+        fracDec += (binary[i] - '0') / twos;
+        twos *= 2.0;
+    }
+
+    // Add both integral and fractional part
+    return intDec + fracDec;
+}
+
+/**
+ * Recieves a string of hex and converts it to a binary number.
+ * @param {*} hex
+ * @returns
+ */
+function convH2B(hex) {
+    var binary = "";
+    var x;
+    var hexDigit; //to represent each digit of the hex
+
+    hex = hex.toUpperCase();
+
+    var conv = {
+        '0': "0000",
+        '1': "0001",
+        '2': "0010",
+        '3': "0011",
+        '4': "0100",
+        '5': "0101",
+        '6': "0110",
+        '7': "0111",
+        '8': "1000",
+        '9': "1001",
+        'A': "1010",
+        'B': "1011",
+        'C': "1100",
+        'D': "1101",
+        'E': "1110",
+        'F': "1111"
+    };
+
+    for (x = 0; x < hex.length; x++) {
+        hexDigit = hex.charAt(x);
+        if (conv[hexDigit] !== undefined){
+            binary += conv[hexDigit];
+        }
+    }
+    return binary;
 }
 
 function fixed(s){
@@ -257,49 +290,17 @@ function fixed(s){
     //alert("length is: " + tempHex.length);
 
 }
-function main(){
-    //1111110 exp -1
-    //1111111100000000000000000000000
-    //00000100000000000000000000000000
-    //00000000001010000000000000000000 denormalized
-    //11111111101010000000000000000000 sNaN
-    //11111111111010000000000000000000 qNaN
-    //10000000000000000000000000000000 -0.0
-    //00000000000000000000000000000000 0.0
-    //var bin = "01000001010100101000000000000000";
 
-    /* 1 function will be for the fixed  and the othe is for the floating point */
-    /* get textbox1 and textbox2 = if both have laman, we output sa errror */
-    /* if textbox1 has laman = compute for hexadecimal */
-    /* if textbox2 has laman = compute for binary */
+// change element to result id later
+function copyValues() {
+    const copyText = document.getElementById("resultMessage");
+    const range = document.createRange();
+    range.selectNode(copyText);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();
 
-    var hex = document.getElementById("textbox1").value.trim();
-    var bin = document.getElementById("textbox2").value.trim();
-
-    //alert("hex: " + hex);
-    //alert("bin: " + bin);
-
-    if(hex.length != 0  && bin.length != 0)
-        document.getElementById("resultMessage").innerHTML = "Only one input can be computed.";
-    else if(hex.length == 0  && bin.length == 0)
-        document.getElementById("resultMessage").innerHTML = "Nothing to compute";
-    else if (hex.length != 0)  // convert hex
-    {
-        // if special case don't do anything
-        var S = convH2B(hex);
-        S = Convert(S);
-        alert("S before: " + S);
-        S = fixed(S);
-        document.getElementById("resultMessage").innerHTML = S;
-        //alert(hex.length);
-
-        // -2.34455E2
-    }
-    else  // convert bin
-    {
-        var S = Convert(bin);
-        document.getElementById("resultMessage").innerHTML = S;
-        alert(S);
-    }
-
+    // Update the message displayed to the user
+    //document.getElementById("resultMessage").innerHTML = "Copied the text: " + copyText.innerHTML;
 }
