@@ -24,7 +24,7 @@ The web-page can be accessed through this link: [TransalationProject](https://jc
 ***
 ## Group 11
 **Group Members:** 
-Chua Ching, Janine 
-Ng, Sherilyn
-Tahimic, Kriz
-Vizmanos, Julianne
+1. Chua Ching, Janine 
+2. Ng, Sherilyn
+3. Tahimic, Kriz
+4. Vizmanos, Julianne
