@@ -23,7 +23,7 @@ The web-page can be accessed through this link: [TransalationProject](https://jc
 
 ***
 ## Group 11
-** Group Members: ** 
+**Group Members:** 
 Chua Ching, Janine 
 Ng, Sherilyn
 Tahimic, Kriz
