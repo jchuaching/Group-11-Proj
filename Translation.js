@@ -41,7 +41,7 @@ function HexToBinary(hex) {
     return binary;
 }
 
-function BinaryToFloat(bin) {
+function BinaryToFixed(bin) {
     if(bin === "10000000000000000000000000000000"){
         return "Special Case -0 (Negative Zero)";
     }
@@ -90,7 +90,7 @@ function BinaryToFloat(bin) {
         }
     }
 
-    // Calculate floating-point value
+    // Calculate fixed value
     var value = sign * mantissa * Math.pow(2, exponent);
     return value;
 }
@@ -106,7 +106,7 @@ function copyValues() {
         window.getSelection().removeAllRanges();
 }
 
-function FloatingToFixed(s){
+function FixedToFloating(s){
     var negative = false;
     var exponent = 0;
 
@@ -141,7 +141,7 @@ function FloatingToFixed(s){
     }
 }
 
-function fixedmain(){
+function floatingpointmain(){
 
     var hex = document.getElementById("textbox1").value.trim();
     var bin = document.getElementById("textbox2").value.trim();
@@ -165,10 +165,10 @@ function fixedmain(){
             }
             else {
                 var S = HexToBinary(hex);
-                S = BinaryToFloat(S);
+                S = BinaryToFixed(S);
                 
-                if (typeof (S) == 'number') {   // if not special case, convert to fixed
-                    S = FloatingToFixed(S);
+                if (typeof (S) == 'number') {   // if not special case, convert to floating
+                    S = FixedToFloating(S);
                 }
                 document.getElementById("resultMessage").innerHTML = S;
             }
@@ -190,10 +190,10 @@ function fixedmain(){
                 document.getElementById("resultMessage").innerHTML = "Binary input is invalid.";
             }
             else {
-                var S = BinaryToFloat(bin);
+                var S = BinaryToFixed(bin);
 
-                if (typeof (S) == 'number') {   // if not special case, convert to fixed
-                    S = FloatingToFixed(S);
+                if (typeof (S) == 'number') {   // if not special case, convert to floating
+                    S = FixedToFloating(S);
                 }
                 document.getElementById("resultMessage").innerHTML = S;
             }
@@ -204,7 +204,7 @@ function fixedmain(){
     }
 }
 
-function floatingpointmain(){
+function fixedmain(){
 
     var hex = document.getElementById("textbox1").value.trim();
     var bin = document.getElementById("textbox2").value.trim();
@@ -227,7 +227,7 @@ function floatingpointmain(){
             }
             else {
                 var S = HexToBinary(hex);
-                S = BinaryToFloat(S);
+                S = BinaryToFixed(S);
 
                 if (typeof (S) == 'number') {
                     S = S + "";
@@ -253,7 +253,7 @@ function floatingpointmain(){
                 document.getElementById("resultMessage").innerHTML = "Binary input is invalid.";
             }
             else {
-                var S = BinaryToFloat(bin);
+                var S = BinaryToFixed(bin);
 
                 if (typeof (S) == 'number') {
                     S = S + "";
